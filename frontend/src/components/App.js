@@ -10,8 +10,10 @@ import { AppBar,
     ListItemText,
     ListItemIcon,
     ListSubheader } from 'material-ui';
-import { Route, Link } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom';
 import '../App.css';
+import PostList from './PostList'
+require('typeface-roboto')
 
 class App extends Component {
 
@@ -41,25 +43,22 @@ class App extends Component {
                     </Toolbar>
                 </AppBar>
 
-            <Route exact path='/'>
+            <Route exact path='/' render={({history}) =>
                 <List subheader={<ListSubheader>{categoriesTitle}</ListSubheader>}>
                     {categories.length > 0 && categories.map(cat => (
-                        <Link to={"/" + cat.name}>
-                            <ListItemIcon>
-                                
-                            </ListItemIcon>
-                            <ListItem button>
-                                <ListItemText inset primary={ cat.name } />
+                        <Link key={cat.name} to={'/' + cat.name}>
+                            <ListItem button key={cat.name}>
+                                <ListItemText primary={cat.name} />
                             </ListItem>
                         </Link>
                     ))}
                 </List>
-            </Route>
+            } />
 
 
             {categories.length > 0 && categories.map(cat => (
-                <Route key={cat.name} path={'/' + cat.path} render={({history}) =>
-                        <div className="Hi">{ cat.name }</div>
+                <Route exact key={cat.name} path={'/' + cat.path} render={({history}) =>
+                    <PostList category={cat} />
                 }
                 />))
             }
