@@ -4,9 +4,16 @@ import {
     Typography,
     List,
     ListItem,
+	ListItemSecondaryAction,
     ListItemText,
     ListItemIcon,
-    ListSubheader } from 'material-ui';
+    ListSubheader,
+ 	IconButton,
+ 	Button,
+ 	Hidden,
+ 	Avatar} from 'material-ui';
+import { Comment, ArrowUpward, ArrowDownward, ChevronRight } from 'material-ui-icons';
+
 
 class PostList extends Component{
 
@@ -44,11 +51,29 @@ class PostList extends Component{
 
             <List subheader={<ListSubheader>{cat.name}</ListSubheader>}>
                 {posts.length > 0 && posts.map(post => (
-                    <Link key={post.id} to={'/' + cat.name + '/' + post.id }>
-                        <ListItem button>
-                            <ListItemText primary={post.title} secondary={post.author} />
+
+                        <ListItem key={post.id}>
+
+							<Avatar>{post.voteScore}</Avatar>
+
+
+							<ListItemText primary={<Link to={'/' + post.id}>{post.title}</Link>} secondary={<Link to={'/' + post.id}>{post.author}</Link>} />
+
+
+							<ListItemSecondaryAction>
+
+								<IconButton dense>
+        							<ArrowUpward />
+      							</IconButton>
+
+								<IconButton dense>
+        							<ArrowDownward />
+      							</IconButton>
+
+              				</ListItemSecondaryAction>
+
                         </ListItem>
-                    </Link>
+
                 ))}
 
 				{posts.length === 0 && (
