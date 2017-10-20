@@ -13,6 +13,7 @@ import {
  	Hidden,
  	Avatar} from 'material-ui';
 import { Comment, ArrowUpward, ArrowDownward, ChevronRight } from 'material-ui-icons';
+import '../App.css';
 
 
 class PostList extends Component{
@@ -57,7 +58,7 @@ class PostList extends Component{
 							<Avatar>{post.voteScore}</Avatar>
 
 
-							<ListItemText primary={<Link to={'/' + post.id}>{post.title}</Link>} secondary={<Link to={'/' + post.id}>{post.author}</Link>} />
+							<ListItemText primary={<Link className="clear-link" to={'/post/' + post.id}>{post.title}</Link>} secondary={<Link className="clear-link" to={'/post/' + post.id}>{post.author}</Link>} />
 
 
 							<ListItemSecondaryAction>
